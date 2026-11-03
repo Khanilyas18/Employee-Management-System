@@ -54,6 +54,29 @@ The application follows a layered architecture:
 - **Filter:** Controls authentication and authorization.
 - **JSP:** Displays the user interface.
 
+- ## Project Structure
+
+```text
+EmployeeManagementSystem/
+│
+├── src/main/java/com/employee/
+│   ├── dao/
+│   ├── filter/
+│   ├── model/
+│   ├── service/
+│   ├── servlet/
+│   └── util/
+│
+├── src/main/webapp/
+│   ├── WEB-INF/
+│   ├── css/
+│   └── JSP pages
+│
+├── pom.xml
+├── README.md
+└── .gitignore
+```
+
 ## Database Setup
 
 1. Start your MySQL server.
@@ -88,11 +111,10 @@ CREATE TABLE users (
 );
 ```
 
-5. Configure your MySQL connection in `DBConnection.java`.
+5. Configure your MySQL connection in `DBConnection.java` using your local database credentials.
 
-**Important:** Use your own database username and password. Never commit actual database credentials or plain-text passwords to GitHub.
+**Important:** Never commit actual database credentials or plain-text passwords to GitHub. Store BCrypt-hashed passwords in the `users` table and assign appropriate roles (`ADMIN` or `EMPLOYEE`).
 
-Create user accounts with BCrypt-hashed passwords and appropriate roles (`ADMIN` or `EMPLOYEE`).
 
 ## How to Run the Project
 
@@ -109,14 +131,30 @@ Create user accounts with BCrypt-hashed passwords and appropriate roles (`ADMIN`
 1. Clone or download this repository.
 2. Import the project into Eclipse as an Existing Maven Project.
 3. Configure MySQL database credentials.
-4. Make sure the required Maven dependencies are downloaded.
-5. Configure Apache Tomcat 10.1 in Eclipse.
-6. Add the project to the Tomcat server.
-7. Start the server.
-8. Open the application:
+4.  mvn clean package
+- This command cleans the previous build files, compiles the project, runs the configured tests, and packages the application as a WAR file inside the target directory.
+5. Make sure the required Maven dependencies are downloaded.
+6. Configure Apache Tomcat 10.1 in Eclipse.
+7. Add the project to the Tomcat server.
+8. Start the server.
+9. Open the application:
 
 ```text
 http://localhost:8080/EmployeeManagementSystem/
+```
+
+### Build Verification
+
+To verify that the project builds successfully, run:
+
+```bash
+mvn clean package
+```
+
+If the build is successful, Maven will generate a WAR file inside the `target` directory.
+
+```text
+target/EmployeeManagementSystem.war
 ```
 
 ## User Roles
